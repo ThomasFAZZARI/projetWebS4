@@ -14,11 +14,11 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<a class="navbar-brand" href="index.php">Accueil</a>
     		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      		<li class=s"nav-item active">
+      		<li class="nav-item active">
         		<a class="nav-link" href="inscription.php">S'inscrire</a>
       		</li>
       		<li class="nav-item active">
-        		<a class="nav-link" href="Connexion.php">Se connecter</a>
+        		<a class="nav-link" href="connexion.php">Se connecter</a>
       		</li>
   		</div>
 	</nav>
@@ -30,10 +30,28 @@
 
 	<div class="card-group">
 
-  		<div class="card">
+			<?php
+				$connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
+				mysqli_select_db($connexion, "ProjetWebS4");
+				$requete = "SELECT * FROM Election";
+				$resultatreq = mysqli_query($connexion,$requete);
 
-    	</div>
-
+				if($resultatreq)
+				{
+					while($ligneResultat = mysqli_fetch_array($resultatreq))
+					{
+						if($ligneResultat['estTerminee']==0){
+							echo "<div class='card' style='text-align:center;'>";
+							echo "<p>".$ligneResultat['Intitule']."</p>";
+							echo "</div>";
+						}
+					}
+				}
+				else
+				{
+					echo "Impossible de charger les elections en cours";
+				}
+			?>
 	</div>
 
 </body>
