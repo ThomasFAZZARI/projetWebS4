@@ -10,9 +10,6 @@
 	<title>Accueil</title>
 </head>
 <header>
-	<?php
-		session_start();
-	?>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<a class="navbar-brand" href="electeur.php">Accueil</a>
@@ -28,37 +25,32 @@
 </header>
 <body>
 
-	<?php echo '<div style="text-align: center;"><br><h1 class="h1">Bienvenue, '.$_SESSION["pseudo"].'</h1><br></div>'; ?>
-	<div style="text-align: center;"><br><h1 class="h1">ÉLECTIONS EN COURS :</h1><br></div>
 
-	<div class="card-group">
 
-			<?php
-				$connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
-				mysqli_select_db($connexion, "ProjetWebS4");
-				$requete = "SELECT * FROM Election";
-				$resultatreq = mysqli_query($connexion,$requete);
 
-				if($resultatreq)
-				{
-					while($ligneResultat = mysqli_fetch_array($resultatreq))
-					{
-						if($ligneResultat['estTerminee']==0){
-							echo "<div class='card' style='text-align:center;'>";
-							echo "<form method='post' action='participation.php?IdElec=".$ligneResultat['IdElection']."'>";
-							echo "<p>".$ligneResultat['Intitule']."</p>";
-							echo "<p><input type='submit' name='participer' class='btn btn-dark' value='Participer'></p>";
-							echo "</form>";
-							echo "</div>";
-						}
-					}
-				}
-				else
-				{
-					echo "Impossible de charger les elections en cours";
-				}
-			?>
-	</div>
+<?php 
+
+	session_start();
+
+	$connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
+	mysqli_select_db($connexion, "ProjetWebS4");
+
+	$requete = "SELECT * FROM Destination WHERE IdDestination IN(SELECT IdDestination FROM Participation WHERE IdElection=".$_GET['IdElec'].")";
+	$resultatreq = mysqli_query($connexion,$requete);
+
+	if($resultatreq)
+		{
+			while($ligneResultat = mysqli_fetch_array($resultatreq))
+			{
+	
+				echo "<p>".$ligneResultat['Nom']."</p>";
+		
+				
+			}
+		}
+
+?>
+
 
 </body>
 </html>

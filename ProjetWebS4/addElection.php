@@ -33,7 +33,7 @@ $destinations = array();
 
 $connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
 mysqli_select_db($connexion, "ProjetWebS4");
-$requete = "SELECT * FROM destinationstest";
+$requete = "SELECT * FROM destination";
 $results = mysqli_query($connexion, $requete);
 //create a multi dimensional array with names per category
 
@@ -43,7 +43,7 @@ $name_combo_boxes_html = "";
 //create category combo_box
 $destination_combobox_php .= '<option value="NULL"> Choix </option>';
 while ($row = mysqli_fetch_object($results)) {
-    $destination_combobox_php .= '<option value="' . $row->id . '">' . $row->name . '</option>';
+    $destination_combobox_php .= '<option value="' . $row->IdDestination . '">' . $row->Nom . '</option>';
 }
 
 ?>
