@@ -9,10 +9,10 @@
 		$EstOrganisateur = 0;
 	}
 
-	$connexion = mysqli_connect("localhost" , "root" , "") or die ("Impossible de se connecter : " . mysqli_error());
+	$connexion = mysqli_connect("localhost" , "root" , "") or die ("Impossible de se connecter : " . mysqli_error($connexion));
 	mysqli_select_db($connexion, "ProjetWebS4");
 	$requete = "INSERT INTO Utilisateur VALUES ('$Pseudo' , '$Mail' , '$MotDePasse' , '$EstOrganisateur')";
-	$execute = mysqli_query($connexion, $requete) or die(mysqli_error());
+	$execute = mysqli_query($connexion, $requete) or die(mysqli_error($connexion));
 	header("Location:/ProjetWebS4/index.php");
 	exit();
 

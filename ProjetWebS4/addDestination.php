@@ -61,7 +61,9 @@
 		 <div class="form-group">
 			<label for="uploadfile" class="col-sm-2 control-label">Image</label>
 			<div class="col-sm-10">
-				<input type="file" name="uploadfile" value="" multiple accept="image/*"/>
+				<input type="file" 
+                   name="uploadfile" 
+                   value="" />
 			</div> 
 		</div>
 		<div class="form-group">

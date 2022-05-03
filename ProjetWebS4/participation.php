@@ -12,13 +12,13 @@
 <header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-			<a class="navbar-brand" href="index.php">Accueil</a>
+			<a class="navbar-brand" href="electeur.php">Accueil</a>
     		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      		<li class="nav-item active">
-        		<a class="nav-link" href="inscription.php">S'inscrire</a>
+      		<li class=s"nav-item active">
+        		<a class="nav-link" href="scripts/scriptDeconnexion.php">Se déconnecter</a>
       		</li>
       		<li class="nav-item active">
-        		<a class="nav-link" href="Connexion.php">Se connecter</a>
+        		<a class="nav-link" href="modifierCompte.php">Modifier son compte</a>
       		</li>
   		</div>
 	</nav>
@@ -26,33 +26,31 @@
 <body>
 
 
-	<div style="text-align: center;"><br><h1 class="h1">ÉLECTIONS EN COURS :</h1><br></div>
 
-	<div class="card-group">
 
-			<?php
-				$connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
-				mysqli_select_db($connexion, "ProjetWebS4");
-				$requete = "SELECT * FROM Election";
-				$resultatreq = mysqli_query($connexion,$requete);
+<?php 
 
-				if($resultatreq)
-				{
-					while($ligneResultat = mysqli_fetch_array($resultatreq))
-					{
-						if($ligneResultat['estTerminee']==0){
-							echo "<div class='card' style='text-align:center;'>";
-							echo "<p>".$ligneResultat['Intitule']."</p>";
-							echo "</div>";
-						}
-					}
-				}
-				else
-				{
-					echo "Impossible de charger les elections en cours";
-				}
-			?>
-	</div>
+	session_start();
+
+	$connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
+	mysqli_select_db($connexion, "ProjetWebS4");
+
+	$requete = "SELECT * FROM Destination WHERE IdDestination IN(SELECT IdDestination FROM Participation WHERE IdElection=".$_GET['IdElec'].")";
+	$resultatreq = mysqli_query($connexion,$requete);
+
+	if($resultatreq)
+		{
+			while($ligneResultat = mysqli_fetch_array($resultatreq))
+			{
+	
+				echo "<p>".$ligneResultat['Nom']."</p>";
+		
+				
+			}
+		}
+
+?>
+
 
 </body>
 </html>

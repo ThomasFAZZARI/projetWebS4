@@ -33,10 +33,31 @@
 
 	<div class="card-group">
 
-  		<div class="card">
+			<?php
+				$connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
+				mysqli_select_db($connexion, "ProjetWebS4");
+				$requete = "SELECT * FROM Election";
+				$resultatreq = mysqli_query($connexion,$requete);
 
-    	</div>
-
+				if($resultatreq)
+				{
+					while($ligneResultat = mysqli_fetch_array($resultatreq))
+					{
+						if($ligneResultat['estTerminee']==0){
+							echo "<div class='card' style='text-align:center;'>";
+							echo "<form method='post' action='participation.php?IdElec=".$ligneResultat['IdElection']."'>";
+							echo "<p>".$ligneResultat['Intitule']."</p>";
+							echo "<p><input type='submit' name='participer' class='btn btn-dark' value='Participer'></p>";
+							echo "</form>";
+							echo "</div>";
+						}
+					}
+				}
+				else
+				{
+					echo "Impossible de charger les elections en cours";
+				}
+			?>
 	</div>
 
 </body>

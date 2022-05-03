@@ -7,7 +7,7 @@
 
 	if(isset($_POST["mail"]) && isset($_POST["mdp"]))
 	{
-		$connexion = mysqli_connect("localhost" , "root" , "") or die ("Impossible de se connecter : " . mysqli_error());
+		$connexion = mysqli_connect("localhost" , "root" , "") or die ("Impossible de se connecter : " . mysqli_error($connexion));
 		mysqli_select_db($connexion, "ProjetWebS4");
 
 		$email = $_POST["mail"];
