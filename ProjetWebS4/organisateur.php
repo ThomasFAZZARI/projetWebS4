@@ -17,7 +17,7 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<a class="navbar-brand" href="organisateur.php">Accueil</a>
     		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      		<li class=s"nav-item active">
+      		<li class="nav-item active">
         		<a class="nav-link" href="scripts/scriptDeconnexion.php">Se déconnecter</a>
       		</li>
       		<li class="nav-item active">

@@ -49,7 +49,6 @@
 			<label for="mdp" class="col-sm-2 control-label"> Mot de passe </label>
 			<div class="col-sm-10">
 				<input type="password" required id="mdp" name="mdp" class="form-control" placeholder="Votre mot de passe">
-				<input type="checkbox" onclick="changePwVisibility()"> Montrer mot de passe
 			</div>
 		</div>
 		<div class="form-group">
@@ -63,14 +62,3 @@
 
 </body>
 </html>
-
-<script>
-	function changePwVisibility() {
-	  var x = document.getElementById("mdp");
-	  if (x.type === "password") {
-	    x.type = "text";
-	  } else {
-	    x.type = "password";
-	  }
-	}
-</script>
