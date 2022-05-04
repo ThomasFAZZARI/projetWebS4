@@ -40,7 +40,6 @@
 		$resultatNbVote = mysqli_query($connexion,$requeteNbVote);
 		$row = mysqli_fetch_array($resultatNbVote);
 		$valeur = $row['nbVotes'] +1;
-		echo $valeur;
 		$MAJvote = "UPDATE Participation SET nbVotes ='".$valeur."' WHERE IdDestination =".$i." AND IdElection=" .$_SESSION['numElec'];
 		$resultatMAJvote = mysqli_query($connexion,$MAJvote);
 		
@@ -108,21 +107,6 @@
 	unset($_SESSION['destinationsRestantes'][$index]);
 
 
-	  echo "destinations <br>";
-	  foreach ($_SESSION['destinations'] as $value) {
-      	echo $value['Nom']." / ";
-	  }
-	  echo "<br>";
-	  echo "destinations restantes <br>";
-	  foreach ($_SESSION['destinationsRestantes'] as $value) {
-      	echo $value['Nom']." / ";
-	  }
-	  echo "<br>";
-	  echo "destinations selectionnes <br>";
-	  foreach ($_SESSION['destinationsSelectionnes'] as $value) {
-      	echo $value['Nom']." / ";
-	  }
-	  echo "<br>";
 ?>
 
 
