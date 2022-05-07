@@ -61,10 +61,40 @@
 		echo "<p><img src='".$reponse[5]."'class='img-fluid'  style='width:500px;height:500px;'></p>";
 		echo "<p>".$reponse[4]."</p>"; 
 		echo "</div>";
+	}
+?>
+<h3>Section commentaire</h3>
+<?php 
+	if(isset($_GET['IdElec'])) {
+		$idElec = $_GET['IdElec'];
+
+		$connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
+		mysqli_select_db($connexion, "ProjetWebS4");
+		$requete = "SELECT * FROM commentaires WHERE IdElection='$idElec'";
+		$resultatreq = mysqli_query($connexion,$requete);
+
+		if($resultatreq)
+		{
+			while($ligneResultat = mysqli_fetch_array($resultatreq))
+			{
+				echo "<div class='card' style='width:50%;border-color:black;'>
+				<p>".$ligneResultat['message']."</p>
+				<div>Par ".$ligneResultat['pseudo']." à ".$ligneResultat['dateMsg']."</div>
+				</div>";	
+				
+			}
+		}
+
+
+		echo "<form  method='POST' name='commentaire' action='scripts/scriptCommentaire.php' accept-charset='UTF-8'>
+		<input type='hidden' name='pseudo' value='".$_SESSION['pseudo']."'> 
+		<input type='hidden' name='idElec' value='".$idElec."'>
+		<textarea name='message' style='width:50%'></textarea><br>
+		<input type='submit' name='submit' class='btn btn-dark' value='Commenter'></input>
+		</form>";
 
 	}
-
-
 ?>
+
 </body>
 </html>

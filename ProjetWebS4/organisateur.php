@@ -42,7 +42,8 @@
 			<?php
 				$connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
 				mysqli_select_db($connexion, "ProjetWebS4");
-				$requete = "SELECT * FROM Election";
+				$idOrga = $_SESSION["idUtilisateur"];
+				$requete = "SELECT * FROM Election WHERE IdOrga = '$idOrga'";
 				$resultatreq = mysqli_query($connexion,$requete);
 
 				if($resultatreq)

@@ -1,11 +1,12 @@
 <?php 
-
+    session_start(); 
+    
 	$nomElection = $_POST["titre"];
-
+    $idOrga = $_SESSION["idUtilisateur"];
 	$connexion = mysqli_connect("localhost" , "root" , "") or die ("Impossible de se connecter : " . mysqli_error($connexion));
 	mysqli_select_db($connexion, "ProjetWebS4");
 
-	$requete = "INSERT INTO election (intitule, estTerminee) VALUES ('$nomElection',0)";
+	$requete = "INSERT INTO election (intitule, estTerminee, IdOrga) VALUES ('$nomElection',0,'$idOrga')";
 	$execute = mysqli_query($connexion, $requete) or die(mysqli_error($connexion));
 
     $result = mysqli_query($connexion,"SELECT MAX(IdElection) AS max_election FROM Election");
