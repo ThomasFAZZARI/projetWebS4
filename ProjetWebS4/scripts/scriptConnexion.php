@@ -25,6 +25,7 @@
 				$_SESSION["mail"] = $email;
 				$_SESSION["mdp"] = $mdp;
 				$_SESSION["pseudo"] = $reponse[0];
+				$_SESSION["estOrg"] = $reponse[3];
 				// le champ à l'indice 3 correspond au booléen "estOrganisateur"
 				if($reponse[3]==1){
 					header("Location:/ProjetWebS4/organisateur.php");

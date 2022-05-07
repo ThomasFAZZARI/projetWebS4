@@ -14,7 +14,7 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<a class="navbar-brand" href="electeur.php">Accueil</a>
     		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      		<li class=s"nav-item active">
+      		<li class="nav-item active">
         		<a class="nav-link" href="scripts/scriptDeconnexion.php">Se déconnecter</a>
       		</li>
       		<li class="nav-item active">
@@ -115,14 +115,23 @@
 	<div class="card-group">
 		<div class='card' style='text-align:center;'>
 			<?php echo "<form method='post' action='participation.php?IdDestination=".$_SESSION['dest1']['IdDestination']."'>"; ?>
-				<?php echo "<p>".$_SESSION['dest1']['Nom']."</p>"; ?>
+				<?php  
+						echo "<p><h2>".$_SESSION['dest1']['Nom']."</h2></p>"; 
+						echo "<p><img src='".$_SESSION['dest1']['Image']."'class='img-fluid' style='width:400px;height:400px;'></p>";
+						echo "<p>".$_SESSION['dest1']['Description']."</p>"; 
+				
+				?>
 				<p><input type='submit' name='participer' class='btn btn-dark' value='Voter pour cette destination'></p>
 			</form>
 		</div>
 
 		<div class='card' style='text-align:center;'>
 			<?php echo "<form method='post' action='participation.php?IdDestination=".$_SESSION['dest2']['IdDestination']."'>"; ?>
-				<?php echo "<p>".$_SESSION['dest2']['Nom']."</p>"; ?>
+				<?php
+						echo "<p><h2>".$_SESSION['dest2']['Nom']."</h2></p>"; 
+						echo "<p><img src='".$_SESSION['dest2']['Image']."'class='img-fluid' style='width:400px;height:400px;'></p>";
+						echo "<p>".$_SESSION['dest2']['Description']."</p>"; 
+				?>
 				<p><input type='submit' name='participer' class='btn btn-dark' value='Voter pour cette destination'></p>
 			</form>
 		</div>

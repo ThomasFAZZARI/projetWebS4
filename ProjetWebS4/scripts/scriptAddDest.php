@@ -8,7 +8,7 @@
 
 	$filename = $_FILES["uploadfile"]["name"];
     $tempname = $_FILES["uploadfile"]["tmp_name"];    
-    $folder = "image/".$filename;
+    $folder = "/ProjetWebS4/img/".$filename;
 
 
 	$connexion = mysqli_connect("localhost" , "root" , "") or die ("Impossible de se connecter : " . mysqli_error($connexion));

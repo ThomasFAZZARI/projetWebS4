@@ -17,7 +17,7 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<a class="navbar-brand" href="electeur.php">Accueil</a>
     		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      		<li class=s"nav-item active">
+      		<li class="nav-item active">
         		<a class="nav-link" href="scripts/scriptDeconnexion.php">Se déconnecter</a>
       		</li>
       		<li class="nav-item active">
@@ -28,8 +28,8 @@
 </header>
 <body>
 
-	<?php echo '<div style="text-align: center;"><br><h1 class="h1">Bienvenue, '.$_SESSION["pseudo"].'</h1><br></div>'; ?>
-	<div style="text-align: center;"><br><h1 class="h1">ÉLECTIONS EN COURS :</h1><br></div>
+	<?php echo '<div style="text-align: center;"><br><h1 class="h1">Bienvenue, '.$_SESSION["pseudo"].' !</h1><br></div>'; ?>
+	<div style="text-align: center;"><br><h3 class="h3">ÉLECTIONS EN COURS :</h3><br></div>
 
 	<div class="card-group">
 
@@ -59,6 +59,39 @@
 				}
 			?>
 	</div>
+
+
+	<div style="text-align: center;"><br><h3 class="h3">ÉLECTIONS TERMINÉES :</h3><br></div>
+
+	<div class="card-group">
+
+			<?php
+				$connexion = mysqli_connect("localhost", "root", "") or die("Impossible de se connecter : " . mysqli_error($connexion));
+				mysqli_select_db($connexion, "ProjetWebS4");
+				$requete = "SELECT * FROM Election";
+				$resultatreq = mysqli_query($connexion,$requete);
+
+				if($resultatreq)
+				{
+					while($ligneResultat = mysqli_fetch_array($resultatreq))
+					{
+						if($ligneResultat['estTerminee']==1){
+							echo "<div class='card' style='text-align:center;'>";
+							echo "<form method='post' action='voirResultats.php?IdElec=".$ligneResultat['IdElection']."'>";
+							echo "<p>".$ligneResultat['Intitule']."</p>";
+							echo "<p><input type='submit' name='resultats' class='btn btn-dark' value='Voir les résultats'></p>";
+							echo "</form>";
+							echo "</div>";
+						}
+					}
+				}
+				else
+				{
+					echo "Impossible de charger les elections termnées";
+				}
+			?>
+	</div>
+
 
 </body>
 </html>
