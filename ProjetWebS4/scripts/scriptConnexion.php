@@ -34,7 +34,12 @@
 			{
 				$_SESSION["mail"] = $email;
 				$_SESSION["mdp"] = $mdp;
-				$_SESSION["pseudo"] = $reponse[0];
+				$_SESSION["idUtilisateur"] = $reponse[0];
+				//dans la bdd, l'idUtilisateur est la 1ere colonne (réponse[0])
+				$_SESSION["pseudo"] = $reponse[1];
+				//dans la bdd, le pseudo est la 2e colonne (réponse[1])
+				$_SESSION["estOrg"] = $reponse[3];
+				//dans la bdd, le marqueur EstOrganisateur est la 4e colonne (réponse[3])
 				if($reponse[3]==1){
 					header("Location:/ProjetWebS4/organisateur.php");
 				}else{

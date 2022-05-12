@@ -58,7 +58,7 @@
 	echo "<br>".$message;
 	
 function addUser($connection, $Pseudo, $Mail, $cryptedPw, $EstOrganisateur, $salt){
-	$query = "INSERT INTO Utilisateur VALUES ('$Pseudo' , '$Mail' , '$cryptedPw', '$EstOrganisateur', '$salt')";
+	$query = "INSERT INTO Utilisateur(Pseudo,Mail,MotDePasse,EstOrganisateur,Sel) VALUES ('$Pseudo' , '$Mail' , '$cryptedPw', '$EstOrganisateur', '$salt')";
 	$statement = $connection->prepare($query);
 	try{
 		$statement->execute();

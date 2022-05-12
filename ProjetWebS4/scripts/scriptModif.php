@@ -22,7 +22,15 @@
 
 	$connexion = mysqli_connect("localhost" , "root" , "") or die ("Impossible de se connecter : " . mysqli_error($connexion));
 	mysqli_select_db($connexion, "ProjetWebS4");
-	$requete = "UPDATE Utilisateur SET Pseudo = '".$Pseudo."' , MotDePasse = '".$MotDePasse."' , EstOrganisateur = '".$EstOrganisateur."' WHERE Mail ='".$Mail."'";
+
+	$requeteSel = "SELECT Sel FROM Utilisateur WHERE IdUtilisateur = ".$_SESSION['idUtilisateur'];
+	$executeSel = mysqli_query($connexion, $requeteSel) or die(mysqli_error($connexion));
+	$reponseSel = mysqli_fetch_array($executeSel);
+
+	$selMdp = $reponseSel[0].$MotDePasse;
+	$cryptedPw = hash("sha384", $selMdp);
+
+	$requete = "UPDATE Utilisateur SET Pseudo = '".$Pseudo."' , MotDePasse = '".$cryptedPw."' , EstOrganisateur = '".$EstOrganisateur."' WHERE Mail ='".$Mail."'";
 	$execute = mysqli_query($connexion, $requete) or die(mysqli_error($connexion));
 
 
