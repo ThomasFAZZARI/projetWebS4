@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+
 <?php
     session_start(); 
 	require '../base.php';
@@ -55,14 +65,23 @@
 		addUser($connection, $Pseudo, $Mail, $cryptedPw, $EstOrganisateur, $salt);
 	}
 	
-	echo "<br>".$message;
+	echo '<div style="text-align: center;"><br><h1 class="h1">'.$message.'</h1><br></div>';
+	if($valid) {
+		echo "<div style='text-align:center;'>
+		<form  method='POST' name='connection' action='scriptConnexion.php' accept-charset='UTF-8'>
+		<input type='hidden' name='mail' value='".$Mail."'> 
+		<input type='hidden' name='mdp' value='".$MotDePasse."'>
+		<p><input type='submit' name='submit' class='btn btn-dark' id='posterComm' value='Connexion'></input></p>
+		</form>
+		</div>";
+	}
 	
 function addUser($connection, $Pseudo, $Mail, $cryptedPw, $EstOrganisateur, $salt){
 	$query = "INSERT INTO Utilisateur(Pseudo,Mail,MotDePasse,EstOrganisateur,Sel) VALUES ('$Pseudo' , '$Mail' , '$cryptedPw', '$EstOrganisateur', '$salt')";
 	$statement = $connection->prepare($query);
 	try{
 		$statement->execute();
-		echo "<br>Votre compte a été créé.";
+		echo '<div style="text-align: center;"><br><h1 class="h1">Votre compte a été créé</h1><br></div>';
 	} catch(PDOException $e) {
 			echo "<br>".$e->getMessage();
 	}
@@ -100,6 +119,10 @@ function cryptPassword($password){
 	return hash("sha384", $password);
 }
 
+
 	exit();
 
 ?>
+
+</body>
+</html>
