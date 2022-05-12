@@ -1,6 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+	<title></title>
+</head>
+<body>
 <?php
 
-
+	session_start();
 	if(isset($_POST["pseudo"]) && isset($_POST["idElec"]) && isset($_POST["message"]))
 	{
 		$connexion = mysqli_connect("localhost" , "root" , "") or die ("Impossible de se connecter : " . mysqli_error($connexion));
@@ -18,6 +27,23 @@
 		mysqli_stmt_execute($stmt);
 			
 
+		echo "
+		<script type='text/javascript'>
 
-		header("Location:/ProjetWebS4/voirResultats.php?IdElec=".$idElec.""); }
+Swal.fire(
+  'Votre commentaire a été posté',
+  '',
+  'success'
+).then(function() {
+    window.location = '/ProjetWebS4/voirResultats.php?IdElec=".$idElec."';
+});
+		</script>
+		";
+
+	}
+
 ?>
+
+
+</body>
+</html>

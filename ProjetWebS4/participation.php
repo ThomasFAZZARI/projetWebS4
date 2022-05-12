@@ -2,6 +2,8 @@
 <html>
 <head>
 
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -46,7 +48,17 @@
 
 		//ajouter un vote ici
 		if(count($_SESSION['destinationsRestantes']) == 0 && count($_SESSION['destinationsSelectionnes']) == 1) {
-			echo "<h1> Fin du vote </h1>";
+			echo "
+				<script type='text/javascript'>
+				Swal.fire(
+				'Fin du vote !',
+				'Vos préférences ont été prises en compte.',
+				'success'
+				).then(function() {
+					window.location = '/ProjetWebS4/electeur.php';
+					});
+					</script>
+			";
 			return;
 		}
 	}

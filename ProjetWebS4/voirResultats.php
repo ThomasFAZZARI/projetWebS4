@@ -65,6 +65,7 @@
 ?>
 <h3>Section commentaire</h3>
 <?php 
+
 	if(isset($_GET['IdElec'])) {
 		$idElec = $_GET['IdElec'];
 
@@ -77,24 +78,27 @@
 		{
 			while($ligneResultat = mysqli_fetch_array($resultatreq))
 			{
-				echo "<div class='card' style='width:50%;border-color:black;'>
+				echo "<div class='card' style='width:50%;border-color:black;margin: 0 auto;float: none;margin-bottom: 10px;'>
 				<p>".$ligneResultat['message']."</p>
 				<div>Par ".$ligneResultat['pseudo']." à ".$ligneResultat['dateMsg']."</div>
 				</div>";	
 				
 			}
 		}
-
+		echo "<p></p>";
 
 		echo "<form  method='POST' name='commentaire' action='scripts/scriptCommentaire.php' accept-charset='UTF-8'>
 		<input type='hidden' name='pseudo' value='".$_SESSION['pseudo']."'> 
 		<input type='hidden' name='idElec' value='".$idElec."'>
 		<textarea name='message' style='width:50%'></textarea><br>
-		<input type='submit' name='submit' class='btn btn-dark' value='Commenter'></input>
+		<p><input type='submit' name='submit' class='btn btn-dark' id='posterComm' value='Commenter'></input></p>
 		</form>";
 
 	}
+
 ?>
+
+
 
 </body>
 </html>

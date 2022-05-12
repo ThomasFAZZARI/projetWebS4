@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+	<title></title>
+</head>
+<body>
+
+
 <?php 
 
 	session_start();
@@ -21,11 +31,36 @@
 	$_SESSION['estOrg']= $EstOrganisateur;
 
 	if(isset($_POST['organisateur'])){
-		header("Location:/ProjetWebS4/organisateur.php");
+		echo "
+				<script type='text/javascript'>
+				Swal.fire(
+				'Modification réussie',
+				'Vos modifications ont été prises en compte.',
+				'success'
+				).then(function() {
+					window.location = '/ProjetWebS4/organisateur.php';
+					});
+					</script>
+		";
 		exit();
 	}else{
-		header("Location:/ProjetWebS4/electeur.php");
+		echo "
+				<script type='text/javascript'>
+				Swal.fire(
+				'Modification réussie',
+				'Vos modifications ont été prises en compte.',
+				'success'
+				).then(function() {
+					window.location = '/ProjetWebS4/electeur.php';
+					});
+					</script>
+		";
 		exit();
 	}
 
 ?>
+
+</body>
+</html>
+
+

@@ -1,6 +1,5 @@
 <?php
 
-
 	session_start(); 
 
 	/* CONNEXION BASE DE DONNEES */
@@ -13,21 +12,29 @@
 		$email = $_POST["mail"];
 		$mdp = $_POST["mdp"];
 
-
 		if($email !== "" && $mdp !== "")
 		{
-			$requete = "SELECT * FROM utilisateur WHERE mail='".$email."' and motdepasse='".$mdp."'";
+			// RÉCUPÉRER DONNÉES
+					
+			$requete = "SELECT * FROM Utilisateur WHERE `Mail`= '$email'";
 			$execute = mysqli_query($connexion, $requete);
 			$reponse = mysqli_fetch_array($execute);
-
-			if(isset($reponse))
+			if(isset($reponse)) {
+				$hashedPw = $reponse["MotDePasse"];
+				$selmdp = $reponse["Sel"].$mdp;
+				if(strcmp(hash("sha384", $selmdp), $hashedPw) == 0) {
+					$inDB = true;
+				} else {
+					$inDB = false;
+				}
+			
+			}
+			
+			if($inDB)
 			{
 				$_SESSION["mail"] = $email;
 				$_SESSION["mdp"] = $mdp;
-				$_SESSION["idUtilisateur"] = $reponse[0];
-				$_SESSION["pseudo"] = $reponse[1];
-				$_SESSION["estOrg"] = $reponse[3];
-				// le champ à l'indice 3 correspond au booléen "estOrganisateur"
+				$_SESSION["pseudo"] = $reponse[0];
 				if($reponse[3]==1){
 					header("Location:/ProjetWebS4/organisateur.php");
 				}else{
